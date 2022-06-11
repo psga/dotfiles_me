@@ -1,0 +1,34 @@
+bspwmrc y rxhkd
+.Xresources para validar el dpi de Xfti. 
+	xrdb -merge ~/.Xresources
+	ademas puse .config/fontconfig/fonts.conf
+		fc-cache -fu
+kitty conf para la configuracion de terminal
+
+	voy a hacer el script de brillo
+
+modo oscuro .config/gtk-3.0/settings.ini
+
+sudo vim /etc/X11/xorg.conf.d/30-touchpad.conf
+
+/etc/tlp.conf
+	CPU_SCALING_GOVERNOR_ON_BAT=powersave
+	CPU_ENERGY_PERF_POLICY_ON_BAT=power
+
+
+ver porque visudo no cuenta tlp y solicita clave...
+cambiar esto.
+arreglado: era el orden de visudo cuando se dice que no tenga password para el comando y luego dice que pongale password se daña
+
+
+
+# git 
+clave ssh. y 
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+
+# vim 
+~/.vimrc
+set clipboard=unnamedplus
+
+sudo pacman -S gvim
