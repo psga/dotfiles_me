@@ -41,3 +41,25 @@ cambiar vim copy paste
 
 theme Black Waves
 orhun.black-waves
+vscodie settings:
+{
+    "editor.fontFamily": "'tamzen'",
+    "workbench.editor.enablePreview": false,
+    "markdown.preview.fontFamily": "'Tamzen', 'Terminal', monospace",
+    "vim.useSystemClipboard": true,
+    "workbench.colorTheme": "Black Waves",
+    "workbench.colorCustomizations": {
+        "titleBar.inactiveBackground": "#000000",
+        "sideBar.inactiveBackground": "#000000",
+        "sideBar.background": "#000000",
+        "titleBar.activeBackground": "#000000",
+        "activityBar.background": "#000000",
+        "editor.background": "#000000"
+    }
+}
+
+
+
+Ver archivos ntfs
+sudo pacman -S ntfs-3g fuse3
+
