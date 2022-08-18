@@ -1,4 +1,9 @@
 bspwmrc y rxhkd
+dpi 
+echo "Xft.dpi: 96" | xrdb -merge
+
+sxhdk
+	dmenu_run -nb '#000000' -nf '#FFFFFF' -sb '#FFFFFF' -sf '#000000' -fn 'Terminus:size=8'
 .Xresources para validar el dpi de Xfti. 
 	xrdb -merge ~/.Xresources
 	ademas puse .config/fontconfig/fonts.conf
@@ -62,4 +67,21 @@ vscodie settings:
 
 Ver archivos ntfs
 sudo pacman -S ntfs-3g fuse3
+
+# zenbrowser
+stylus extension para cambiar fuente
+
+
+/* Esto aplica la fuente a todos los elementos de cualquier página */
+* {
+    font-family: "Tamzen", monospace !important;
+}
+
+/* Opcional: Ajustar el suavizado para que las fuentes bitmap se vean nítidas */
+html {
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    text-rendering: crispEdges;
+}
+
 
