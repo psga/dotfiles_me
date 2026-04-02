@@ -1,24 +1,24 @@
-# 🚀 04 - Otras Aplicaciones
+# 04 - Other Applications
 
-Ajustes extras y misceláneos de aplicaciones en uso del ecosistema actual de trabajo.
+Extra and miscellaneous tweaks for applications currently used in the work ecosystem.
 
 ---
 
-## 1. Navegador Web (Zen Browser / Firefox base)
+## 1. Web Browser (Zen Browser / Firefox base)
 
-Buscas que toda la interfaz gráfica, e incluso el HTML que es renderizado si es posible, siga la sintonía general de píxeles/tipografía con `Tamzen`.
+You aim for the entire graphical interface, and even the rendered HTML if possible, to follow the general pixel/typography vibe with `Tamzen`.
 
-Se requiere instalar la extensión global conocida como `Stylus` dentro de la tienda de add-ons e incorporar la siguiente regla general.
+You need to install the global extension known as `Stylus` from the add-ons store and incorporate the following general rule.
 
-### Regla CSS para Tipografía Global
+### CSS Rule for Global Typography
 
 ```css
-/* Esto aplica la fuente a todos los elementos de cualquier página */
+/* This applies the font to all elements on any page */
 * {
     font-family: "Tamzen", monospace !important;
 }
 
-/* Opcional: Ajustar el suavizado para que las fuentes bitmap se vean nítidas */
+/* Optional: Adjust anti-aliasing to make bitmap fonts look sharp */
 html {
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: unset;
@@ -26,24 +26,24 @@ html {
 }
 ```
 
-### Configuración Interna
+### Internal Configuration
 
-Dirígete en al buscador de URL escribiendo `about:config`:
+Go to the URL search bar and type `about:config`:
 
 -   **Variable**: `zen.theme.content-element-separation`
--   **Valor Nuevo**: `0`
+-   **New Value**: `0`
 
-*(Esto anulará algunos bordes blancos o separaciones pesadas en algunas tabs entre el contenido).*
+*(This will override some white borders or heavy separations between content in some tabs).*
 
 ---
 
-## 2. Capturas de Pantalla Rápidas (Flameshot)
+## 2. Quick Screenshots (Flameshot)
 
-Para documentaciones rápidas y recortes se confía en Flameshot con un UI GUI superpuesta sobre el Window Manager en tiempo real.
+For quick documentation and snips, Flameshot is relied upon, featuring a GUI overlaid on top of the Window Manager in real-time.
 
-Se levantan en `~/.config/flameshot/flameshot.ini`, pero su interacción principal es usar el atajo asignado a sus funciones GUI por pantalla:
+They are initialized in `~/.config/flameshot/flameshot.ini`, but its main interaction is using the assigned shortcut for its on-screen GUI functions:
 
-**En sxhkd:**
+**In sxhkd:**
 ```sxhkdrc
 super + shift + s
 	flameshot gui

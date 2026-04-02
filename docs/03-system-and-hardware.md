@@ -1,15 +1,15 @@
-# ⚙️ 03 - Sistema y Hardware
+# 03 - System and Hardware
 
-Configuraciones relacionadas al soporte e interacciones más profundas del sistema operativo y hardware de tu máquina Arch.
+Configurations related to deeper OS and hardware support and interactions for your Arch machine.
 
 ---
 
-## 1. Módulos de Entrada: Touchpad (Xorg)
+## 1. Input Modules: Touchpad (Xorg)
 
-Para aprovechar los toques en lugar de botones físicos y habilitar un "scroll natural" (ideal si vienes de otros SO), el archivo principal se maneja sobre *Xorg*.
+To utilize tapping instead of physical buttons and enable "natural scrolling" (ideal if coming from other OSs), the main file is handled via *Xorg*.
 
-**Archivo:** `/etc/X11/xorg.conf.d/30-touchpad.conf`
-*(Requiere permisos root)*
+**File:** `/etc/X11/xorg.conf.d/30-touchpad.conf`
+*(Requires root privileges)*
 
 ```conf
 Section "InputClass"
@@ -22,15 +22,15 @@ EndSection
 
 ---
 
-## 2. Ahorro de Energía (TLP)
+## 2. Power Saving (TLP)
 
-Se ha configurado un manejo inteligente de ahorro de recursos, orientado fundamentalmente cuando el equipo usa Batería. 
+Smart resource saving management has been set up, mainly oriented for when the machine is running on Battery.
 
-### Utilidad TLP Configurada
+### TLP Utility Configured
 
-Se manipula el `Governor` en CPU si está sin cable de energía para preservar vida útil y no estancar la carga a 100%.
+The CPU `Governor` is manipulated if unplugged from power to preserve battery lifespan and prevent stagnation at 100% charge.
 
-**Archivo:** `/etc/tlp.conf`
+**File:** `/etc/tlp.conf`
 ```conf
 CPU_SCALING_GOVERNOR_ON_BAT=powersave
 CPU_ENERGY_PERF_POLICY_ON_BAT=power
@@ -38,43 +38,43 @@ START_CHARGE_THRESH_BAT0=75
 STOP_CHARGE_THRESH_BAT0=80
 ```
 
-### Excepciones en `sudoers` sin Contraseña
+### Passwordless Exceptions in `sudoers`
 
-Para poder correr revisiones o reinicios de TLP sin molestas interrupciones por password temporal en scripts:
+To be able to run TLP checks or restarts without annoying temporary password interruptions in scripts:
 
 > [!WARNING]
-> Ten cuidado al hacer esto; si el formato se daña usar un visudo mal configurado puede dejarte sin root. Siempre usa `visudo` para comprobar y guardar.
+> Be careful when doing this; a poorly configured visudo syntax can lock you out of root access. Always use `visudo` to check and save.
 
-**Ejecución:** Usa `sudo visudo` y coloca la excepción que se refiera a tu usuario en la base, abajo del todo (para evitar que otras variables rompan tu filtro):
+**Execution:** Use `sudo visudo` and place the exception referring to your user at the bottom (to prevent other variables from breaking your filter):
 
 ```sudoers
-<tu_usuario> ALL=(ALL) NOPASSWD: /usr/bin/tlp, /usr/bin/tlp-stat
+<your_user> ALL=(ALL) NOPASSWD: /usr/bin/tlp, /usr/bin/tlp-stat
 ```
 
 ---
 
-## 3. Control de Hardware por Teclado
+## 3. Hardware Control via Keyboard
 
-### Audio / Volúmen / Micrófonos (Vía `pamixer` / scripts)
+### Audio / Volume / Microphones (Via `pamixer` / scripts)
 
-En combinaciones de Thinkpads (como indica las notas que la salida de auriculares sea el Sink 1 en vez del 0), o computadoras normales, se interactúa directo con los scripts `volume.sh`.
+On combinations of Thinkpads (as notes indicate headphone output might be Sink 1 instead of 0), or normal computers, direct interaction happens through the `volume.sh` scripts.
 
 ```bash
 sudo pacman -S pamixer
 ```
 
-Estos atajos se enlazan en el archivo `~/.config/sxhkd/sxhkdrc`:
+These shortcuts are linked in the `~/.config/sxhkd/sxhkdrc` file:
 ```sxhkdrc
 XF86AudioLowerVolume  -> volume -d 5
 XF86AudioRaiseVolume  -> volume -i 5
 XF86AudioMute         -> volume -t
 XF86AudioMicMute      -> /usr/bin/pamixer --default-source -t
 ```
-> Revisa la ruta real de tu archivo de volumen que esté existiendo en: `~/.config/sxhkd/scripts/volume.sh`.
+> Verify the actual path of your volume file exists at: `~/.config/sxhkd/scripts/volume.sh`.
 
-### Brillo (Vía `brightnessctl`)
+### Brightness (Via `brightnessctl`)
 
-Para aumentar o reducir la iluminación por saltos porcentuales justos, prescindimos de scripts custom y llamamos directamente en el bloque Sxhkd:
+To increase or decrease illumination by exact percentage jumps, we forego custom scripts and call it directly in the Sxhkd block:
 
 ```sxhkdrc
 # -- Brightness Control --
@@ -85,13 +85,13 @@ XF86MonBrightnessDown
     brightnessctl set 5%-
 ```
 
-(Tenían una alternativa previa basada en `light`/`brillo.sh`, pero la actual recomendada nativa es `brightnessctl`).
+(There used to be a previous alternative based on `light`/`brillo.sh`, but the current recommended native way is `brightnessctl`).
 
 ---
 
-## 4. Almacenamiento Adicional y Memorias USB
+## 4. Extra Storage and USB Drives
 
-Cuando tienes Dual boot o simplemente conectas discos con formatos de archivo de Windows a las computadoras de ArchLinux, requerirás esto de forma vital para monturas sanas.
+When you dual boot or simply connect drives with Windows file formats to Arch Linux machines, you will critically need this for healthy mounting.
 
 ```bash
 sudo pacman -S ntfs-3g fuse3

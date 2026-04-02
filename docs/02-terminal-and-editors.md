@@ -1,22 +1,22 @@
-# 💻 02 - Terminal y Editores (Desarrollo)
+# 02 - Terminal and Editors (Development)
 
-La configuración base del flujo de trabajo se centra en un emulador de terminal avanzado (`kitty`), junto con herramientas y editores consistentes con la temática y atajos oscuros/minimalistas.
+The base workflow configuration revolves around an advanced terminal emulator (`kitty`), alongside tools and editors consistent with the dark/minimalist theme and shortcuts.
 
 ---
 
 ## 1. Terminal: Kitty
 
-`kitty` es el emulador de terminal por defecto, soportando renderizado por GPU y altamente personalizable.
+`kitty` is the default terminal emulator, supporting GPU rendering and being highly customizable.
 
-### Requisitos
+### Requirements
 
 ```bash
 sudo pacman -S kitty
 ```
 
-### Configuración principal (`~/.config/kitty/kitty.conf`)
+### Main Configuration (`~/.config/kitty/kitty.conf`)
 
-Destacan los siguientes aspectos de tu archivo por defecto:
+Here are the standout aspects of your default file:
 
 ```conf
 font_family      tamzen
@@ -24,22 +24,22 @@ font_size        12.0
 copy_on_select   yes
 background       #000000
 ```
-- **Tamaño y fuente:** `tamzen` tamaño `12`.
-- **Comodidad extra:** `copy_on_select` está activo. Al seleccionar un texto en tu kitty se copia automáticamente sin tener que apretar nada.
+- **Size and font:** `tamzen` size `12`.
+- **Extra convenience:** `copy_on_select` is active. Selecting text in kitty automatically copies it without pressing any keys.
 
 ---
 
 ## 2. Neovim / Vim (`~/.vimrc`)
 
-Vim está configurado mediante un único archivo simple:
+Vim is configured through a single simple file:
 
-### Dependencias y Config
+### Dependencies and Config
 
 ```bash
 sudo pacman -S gvim
 ```
 
-**Archivo:** `~/.vimrc`
+**File:** `~/.vimrc`
 ```vim
 syntax on
 colorscheme quiet
@@ -48,22 +48,22 @@ set nocompatible
 filetype plugin indent on
 ```
 
-- **`clipboard=unnamedplus`**: Super útil para sincronizar el copiado interno (usando `y`, `d`, y `p`) con el portapapeles del sistema X11, haciendo que copiar o pegar desde y hacia otras aplicaciones como el navegador sea limpio.
-- **Tema**: `quiet`.
+- **`clipboard=unnamedplus`**: Extremely useful for syncing internal copying (using `y`, `d`, and `p`) with the X11 system clipboard, making copy-pasting to and from other apps like the browser very clean.
+- **Theme**: `quiet`.
 
 ---
 
 ## 3. Visual Studio Code (`settings.json`)
 
-Se ha procurado en el JSON de usuario de VSCode igualar mucho el estilo del terminal para que la vista del código se parezca a Kitty y Vim trabajando en paralelo.
+Effort has been made in the user JSON of VSCode to match the terminal's style so that the code view looks like Kitty and Vim working in parallel.
 
-### Configuración Recomendada de Code
+### Recommended Code Settings
 
-Para coincidir con el resto, se usa lo siguiente:
-- **Tema**: *Black Waves* (`orhun.black-waves` - necesitas instalar esta extensión de temas en VSCode).
-- **Tipografía Compartida**: La fuente `Tamzen` que ya instalaste para Kitty, se declara también aquí (al igual que la configuración en los *Markdown Previews*).
+To match the rest, the following is used:
+- **Theme**: *Black Waves* (`orhun.black-waves` - you need to install this theme extension in VSCode).
+- **Shared Typography**: The `Tamzen` font you already installed for Kitty is declared here too (as well as the settings for *Markdown Previews*).
 
-**Ejemplo de Settings clave:**
+**Key Settings Example:**
 ```json
 {
     "editor.fontFamily": "'tamzen'",
@@ -81,16 +81,16 @@ Para coincidir con el resto, se usa lo siguiente:
     }
 }
 ```
-Además de las variables de colores e interfaz (las cuales quitan distracciones a base de oscurecer toda la UI en `#000000`), el módulo `vim.useSystemClipboard` confirma que la integración de Vim sobre VSCode aprovecha el portapapeles universal.
+Besides the color and interface variables (which remove distractions by darkening the entire UI to `#000000`), the `vim.useSystemClipboard` module ensures that the Vim integration inside VSCode takes advantage of the universal clipboard.
 
 ---
 
 ## 4. Git Global Override
 
-Para forzar el uso de SSH sobre HTTPS y mejorar los pushes a repositorios, el archivo de configuración global `.gitconfig` incluye o recomienda una reescritura de URLs nativa de Git.
+To force using SSH over HTTPS and improve pushes to repositories, the global `.gitconfig` file includes or recommends a native URL rewrite for Git.
 
 ```bash
-# Asumiendo que ya tienes tu clave generada:
+# Assuming you already generated your key:
 git config --global url."git@github.com:".insteadOf "https://github.com/"
 ```
-Esto le indica al sub-sistema ssh que toda URL que Git intercepte como "https://github.com" intente rutearla a "git@github.com".
+This tells the ssh subsystem that every URL Git intercepts as "https://github.com" should be routed to "git@github.com".
