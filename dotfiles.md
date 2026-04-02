@@ -85,3 +85,17 @@ html {
 }
 
 
+## nmcli 
+
+## bluetoothctl
+
+## okular
+
+## pamixer
+sudo pacman -S pamixer
+En los drivers HiFi de ThinkPad, a veces los altavoces son el sink 0 y los auriculares el sink 1
+
+## zen brwser 
+
+about:config
+    zen.theme.content-element-separation → Ponlo en 0.

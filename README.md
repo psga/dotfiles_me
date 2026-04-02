@@ -1,118 +1,67 @@
-### Directiva de Configuración de Dotfiles (Arch + bspwm)
+# 💻 Pablo's Dotfiles
+
+¡Hola! Este repositorio contiene la configuración de mi entorno de trabajo. Está pensado para un entorno rápido, productivo y minimalista usando **Arch Linux** junto con herramientas ligeras.
+
+![Screenshot de ejemplo](https://raw.githubusercontent.com/baskerville/bspwm/master/examples/desktop.png) <!-- Reemplaza esto con una tuya propia si tienes -->
+
+## 🛠️ Stack Principal
+
+- **OS:** Arch Linux.
+- **Window Manager:** [bspwm](https://github.com/baskerville/bspwm)
+- **Keybindings:** [sxhkd](https://github.com/baskerville/sxhkd)
+- **Terminal:** [kitty](https://sw.kovidgoyal.net/kitty/)
+- **Editor:** Neovim / VSCode
+- **App Launcher:** dmenu
 
 ---
 
-#### 1. X11 & UI Resources
-**~/.Xresources**
-```x11
-Xft.dpi: 96
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintfull
-Xft.hinting: 1
-Xft.antialias: 1
-```
-**Ejecución:** `xrdb -merge ~/.Xresources`
+## 📂 Estructura del Repositorio
 
-**~/.config/gtk-3.0/settings.ini**
-```ini
-[Settings]
-gtk-application-prefer-dark-theme=1
-gtk-theme-name=Adwaita-dark
-```
+Para evitar que el manual sea muy largo en esta pantalla principal, la documentación está dividida en submódulos por temáticas. **Haz clic en el enlace para ver cómo está configurado cada aspecto de este entorno:**
+
+1. 🪟 [01 - Window Manager y Entorno (bspwm, sxhkd, polybar)](docs/01-window-manager.md)
+   - Detalles sobre reglas X11, bspwmrc, atajos en sxhkd, y temas oscuros (GTK).
+2. 💻 [02 - Terminal y Editores (kitty, (neo)vim, vscode, git)](docs/02-terminal-and-editors.md)
+   - Ajuste de fuentes, sincronización de portapapeles y temas.
+3. ⚙️ [03 - Sistema y Hardware (Batería, Touchpad, Audio)](docs/03-system-and-hardware.md)
+   - TLP para ahorrar batería, touchpad (`xorg.conf.d`), y volumen (`pamixer`/`brightnessctl`).
+4. 🚀 [04 - Otras Aplicaciones (Navegador, Screenshots)](docs/04-misc-apps.md)
+   - Zen Browser, tipografías personalizadas globales, NTFS y `flameshot`.
 
 ---
 
-#### 2. Terminal & Editor (Sync Clipboard)
-**Requisito:** `sudo pacman -S gvim kitty`
+## 🚀 Instalación Rápida
 
-**~/.vimrc**
-```vim
-syntax on
-colorscheme quiet
-set clipboard=unnamedplus
-set nocompatible
-filetype plugin indent on
-```
+La mejor forma de usar estos dotfiles no es copiarlos sin más, sino usar enlaces simbólicos (`ln -s`) o utilidades como [`stow`](https://www.gnu.org/software/stow/) para que los cambios en el repositorio actualicen los archivos del sistema al vuelo.
 
-**~/.config/kitty/kitty.conf**
-```conf
-font_family      tamzen
-font_size        12.0
-copy_on_select   yes
-background       #000000
-```
-
----
-
-#### 3. Hardware & Power Management
-**/etc/X11/xorg.conf.d/30-touchpad.conf**
-```conf
-Section "InputClass"
-    Identifier "devname"
-    Driver "libinput"
-    Option "Tapping" "on"
-    Option "NaturalScrolling" "true"
-EndSection
-```
-
-**/etc/tlp.conf**
-```conf
-CPU_SCALING_GOVERNOR_ON_BAT=powersave
-CPU_ENERGY_PERF_POLICY_ON_BAT=power
-START_CHARGE_THRESH_BAT0=75
-STOP_CHARGE_THRESH_BAT0=80
-```
-
-**/etc/sudoers (via visudo)**
-```sudoers
-# Mantener al final del archivo
-<usuario> ALL=(ALL) NOPASSWD: /usr/bin/tlp, /usr/bin/tlp-stat
-```
-
----
-
-#### 4. Git & Storage
-**Configuración Global:**
 ```bash
-git config --global url."git@github.com:".insteadOf "https://github.com/"
-sudo pacman -S ntfs-3g fuse3
+# 1. Clona el repositorio
+git clone <URL_DEL_REPOSITORIO> ~/dotfiles
+
+# 2. Crea enlaces simbólicos de tus archivos (ejemplo clásico)
+ln -sf ~/dotfiles/.config/bspwm ~/.config/bspwm
+ln -sf ~/dotfiles/.config/sxhkd ~/.config/sxhkd
+ln -sf ~/dotfiles/.config/kitty ~/.config/kitty
+ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.Xresources ~/.Xresources
 ```
 
----
+> [!NOTE]
+> Revisa la [documentación de la Wiki de Arch](https://wiki.archlinux.org/title/Dotfiles) para enterarte por qué es buena idea organizar así tus configuraciones.
 
-#### 5. VSCode (settings.json)
-```json
-{
-    "editor.fontFamily": "'tamzen'",
-    "workbench.editor.enablePreview": false,
-    "vim.useSystemClipboard": true,
-    "workbench.colorTheme": "Black Waves",
-    "workbench.colorCustomizations": {
-        "titleBar.inactiveBackground": "#000000",
-        "sideBar.inactiveBackground": "#000000",
-        "sideBar.background": "#000000",
-        "titleBar.activeBackground": "#000000",
-        "activityBar.background": "#000000",
-        "editor.background": "#000000"
-    }
-}
-```
+### Dependencias Inmediatas
 
----
+Para que los componentes clave (`bspwm` y `sxhkd`, así como sus complementos básicos) funcionen al instante, vas a necesitar:
 
-#### 6. Script de Brillo (`brillo.sh`)
 ```bash
-#!/bin/bash
-# Requisito: sudo pacman -S light
-case $1 in
-    up) light -A 5 ;;
-    down) light -U 5 ;;
-esac
-```
-**sxhkdrc integration:**
-```conf
-XF86MonBrightness{Up,Down}
-    /path/to/brillo.sh {up,down}
+sudo pacman -S bspwm sxhkd kitty xorg-server xorg-xinit dmenu
 ```
 
+Lee la documentación de la carpeta `docs/` para ver las dependencias específicas (como `pamixer`, `brightnessctl`, etc.).
+
+---
+
+**Nota Importante sobre `bspwmrc`**: Actualmente, la configuración base asume que tienes algunos scripts propios y paquetes que posiblemente no estén instalados, o no aparecen en este repositorio. Verifica lo siguiente al inicializar tu entorno:
+- `~/.config/polybar/launch.sh` (si usas Polybar, asegúrate de añadirla a `.config/polybar`).
+- `~/.config/bspwm/scripts/monitor_setup.sh` y `hot_corner_bar.sh` (si no están, remuévelos del `bspwmrc` o alójalos).
+- `~/.config/sxhkd/scripts/volume.sh`.
