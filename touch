@@ -1,0 +1,6 @@
+Zen
+browser.tabs.unloadOnLowMemory true
+Busca: browser.tabs.unloadOnLowMemory y ponlo en true.Busca: browser.low_memory_notifier_enabled y ponlo en true.
+En about:config, busca: widget.gtk.rounded-bottom-corners.enabled.
+accessibility.force_disabled  1
+gfx.webrender.all true
