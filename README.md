@@ -23,10 +23,10 @@ To prevent this main guide from becoming too long, the documentation is divided 
    - Details on X11 rules, bspwmrc, sxhkd shortcuts, and dark themes (GTK).
 2. [02 - Terminal and Editors (kitty, (neo)vim, vscode, git)](docs/02-terminal-and-editors.md)
    - Font settings, clipboard synchronization, and themes.
-3. [03 - System and Hardware (Battery, Touchpad, Audio)](docs/03-system-and-hardware.md)
-   - TLP for battery saving, touchpad (`xorg.conf.d`), and volume control (`pamixer`/`brightnessctl`).
-4. [04 - Other Applications (Browser, Screenshots)](docs/04-misc-apps.md)
-   - Zen Browser, global custom fonts, NTFS support, and `flameshot`.
+3. [03 - System and Hardware (Battery, Touchpad, Audio, Storage)](docs/03-system-and-hardware.md)
+   - power-profiles-daemon for power profiles, touchpad (`xorg.conf.d`), volume control (`pamixer`/`libpulse`), and NTFS support (`ntfs-3g`).
+4. [04 - Other Applications (Browser, Screenshots, Multimedia, Emojis)](docs/04-misc-apps.md)
+   - Zen Browser, global custom fonts, `flameshot`, media players (MPV, VLC), Shotcut, and Twemoji.
 
 ---
 

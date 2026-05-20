@@ -43,7 +43,7 @@ pkill picom
 picom &
 $HOME/.config/bspwm/scripts/monitor_setup.sh &
 pkill polybar 
-~/.config/polybar/launch.sh --colorblocks &
+~/.config/polybar/launch.sh &
 (
   while ! xdo id -N Polybar; do sleep 0.2; done
   # Esto ahora sí funcionará permanentemente porque bspwm no forzará la barra hacia abajo

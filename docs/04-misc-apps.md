@@ -31,9 +31,23 @@ html {
 Go to the URL search bar and type `about:config`:
 
 -   **Variable**: `zen.theme.content-element-separation`
--   **New Value**: `0`
+    -   **Value**: `0` *(This will override some white borders or heavy separations between content in some tabs).*
 
-*(This will override some white borders or heavy separations between content in some tabs).*
+#### Battery & Performance Tweaks
+
+-   **Variable**: `browser.tabs.unloadOnLowMemory`
+    -   **Value**: `true` *(Unloads tabs when memory is low).*
+-   **Variable**: `browser.low_memory_notifier_enabled`
+    -   **Value**: `true` *(Enables low-memory notifications).*
+-   **Variable**: `gfx.webrender.all`
+    -   **Value**: `true` *(Forces GPU WebRender system-wide for smoother performance).*
+-   **Variable**: `accessibility.force_disabled`
+    -   **Value**: `0`
+
+#### Aesthetics
+
+-   **Variable**: `widget.gtk.rounded-bottom-corners.enabled`
+    -   *(Configure GTK rounded corners according to preference).*
 
 ---
 
@@ -47,4 +61,34 @@ They are initialized in `~/.config/flameshot/flameshot.ini`, but its main intera
 ```sxhkdrc
 super + shift + s
 	flameshot gui
+```
+
+---
+
+## 3. Multimedia (Players & Editors)
+
+For media playback and video editing, we use the following packages:
+
+### Media Players (MPV & VLC)
+
+To install the media players:
+```bash
+sudo pacman -S mpv vlc
+```
+
+### Video Editor (Shotcut)
+
+To install the video editor:
+```bash
+sudo pacman -S shotcut
+```
+
+---
+
+## 4. Fonts and Emojis
+
+To enable proper emoji rendering system-wide, install Twemoji from the AUR:
+
+```bash
+yay -S ttf-twemoji
 ```

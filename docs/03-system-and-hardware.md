@@ -22,33 +22,27 @@ EndSection
 
 ---
 
-## 2. Power Saving (TLP)
+## 2. Power Profiles Daemon (`power-profiles-daemon`)
 
-Smart resource saving management has been set up, mainly oriented for when the machine is running on Battery.
+Instead of TLP, we use `power-profiles-daemon` to manage power profiles (performance, balanced, power-saver) natively.
 
-### TLP Utility Configured
+### Installation and Enablement
 
-The CPU `Governor` is manipulated if unplugged from power to preserve battery lifespan and prevent stagnation at 100% charge.
-
-**File:** `/etc/tlp.conf`
-```conf
-CPU_SCALING_GOVERNOR_ON_BAT=powersave
-CPU_ENERGY_PERF_POLICY_ON_BAT=power
-START_CHARGE_THRESH_BAT0=75
-STOP_CHARGE_THRESH_BAT0=80
+```bash
+sudo pacman -S power-profiles-daemon
+sudo systemctl enable --now power-profiles-daemon
 ```
 
-### Passwordless Exceptions in `sudoers`
+### Checking and Changing Profiles
 
-To be able to run TLP checks or restarts without annoying temporary password interruptions in scripts:
+To check the current status and profiles available:
+```bash
+powerprofilesctl
+```
 
-> [!WARNING]
-> Be careful when doing this; a poorly configured visudo syntax can lock you out of root access. Always use `visudo` to check and save.
-
-**Execution:** Use `sudo visudo` and place the exception referring to your user at the bottom (to prevent other variables from breaking your filter):
-
-```sudoers
-<your_user> ALL=(ALL) NOPASSWD: /usr/bin/tlp, /usr/bin/tlp-stat
+To set a specific profile manually:
+```bash
+powerprofilesctl set power-saver
 ```
 
 ---
@@ -57,10 +51,10 @@ To be able to run TLP checks or restarts without annoying temporary password int
 
 ### Audio / Volume / Microphones (Via `pamixer` / scripts)
 
-On combinations of Thinkpads (as notes indicate headphone output might be Sink 1 instead of 0), or normal computers, direct interaction happens through the `volume.sh` scripts.
+On combinations of Thinkpads (as notes indicate headphone output might be Sink 1 instead of 0), or normal computers, direct interaction happens through the `volume.sh` scripts. Ensure you have the audio packages (`pamixer` and `libpulse`) installed for proper sound and volume control:
 
 ```bash
-sudo pacman -S pamixer
+sudo pacman -S pamixer libpulse
 ```
 
 These shortcuts are linked in the `~/.config/sxhkd/sxhkdrc` file:
